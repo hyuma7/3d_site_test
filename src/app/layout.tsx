@@ -8,8 +8,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'CHRONOS | Luxury Timepiece',
-  description: 'Experience the art of haute horlogerie through an immersive 3D journey',
+  title: '葬送のフリーレン | Frieren',
+  description: '千年を生きるエルフの魔法使い、フリーレンの物語を3Dで体験',
 };
 
 export default function RootLayout({

@@ -28,10 +28,10 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
     return 'ending';
   }, [progress]);
 
-  const materialName = useMemo(() => {
-    if (materialProgress < 0.33) return 'Stainless Steel';
-    if (materialProgress < 0.66) return '18K Rose Gold';
-    return 'Grade 5 Titanium';
+  const characterAspect = useMemo(() => {
+    if (materialProgress < 0.33) return '千年を生きるエルフ';
+    if (materialProgress < 0.66) return '勇者ヒンメルの仲間';
+    return '葬送のフリーレン';
   }, [materialProgress]);
 
   return (
@@ -44,10 +44,10 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
         >
           <div className="text-center">
             <h1 className="text-6xl md:text-8xl font-thin tracking-[0.3em] text-white mb-4">
-              CHRONOS
+              FRIEREN
             </h1>
             <p className="text-sm md:text-base tracking-[0.5em] text-white/60 uppercase">
-              Master of Time
+              葬送のフリーレン
             </p>
           </div>
         </div>
@@ -60,20 +60,21 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
           style={{ opacity: easedDetail }}
         >
           <h2 className="text-2xl font-light tracking-wider text-white mb-4">
-            Dial Craftsmanship
+            千年の孤独
           </h2>
           <p className="text-sm text-white/70 leading-relaxed">
-            Each dial features hand-applied indices with luminescent coating,
-            ensuring perfect legibility in any lighting condition.
+            魔王を倒した勇者パーティーの魔法使い。
+            長命なエルフである彼女は、仲間との別れを経て
+            「人を知る」旅に出る。
           </p>
           <div className="mt-6 space-y-2">
             <div className="flex justify-between text-xs text-white/50">
-              <span>Water Resistance</span>
-              <span>100m</span>
+              <span>種族</span>
+              <span>エルフ</span>
             </div>
             <div className="flex justify-between text-xs text-white/50">
-              <span>Crystal</span>
-              <span>Sapphire</span>
+              <span>年齢</span>
+              <span>1000歳以上</span>
             </div>
           </div>
         </div>
@@ -86,18 +87,19 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
           style={{ opacity: easedExplode }}
         >
           <h2 className="text-2xl font-light tracking-wider text-white mb-4">
-            In-House Movement
+            魔法の探求者
           </h2>
           <p className="text-sm text-white/70 leading-relaxed">
-            Caliber CH-3000 automatic movement with 72-hour power reserve,
-            decorated with Côtes de Genève and hand-beveled bridges.
+            民間魔法から古代魔法まで、あらゆる魔法を収集する。
+            「花畑を出す魔法」のような日常魔法も大切にする、
+            魔法を愛する者。
           </p>
           <div className="mt-6">
             <div className="text-3xl font-thin text-white/90">
-              28,800
+              一級魔法使い
             </div>
             <div className="text-xs text-white/50 uppercase tracking-wider">
-              Vibrations per hour
+              大陸魔法協会
             </div>
           </div>
         </div>
@@ -110,10 +112,10 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
           style={{ opacity: easedMaterial }}
         >
           <p className="text-xs text-white/50 uppercase tracking-[0.3em] mb-2">
-            Material
+            Character
           </p>
           <h2 className="text-3xl font-light tracking-wider text-white">
-            {materialName}
+            {characterAspect}
           </h2>
         </div>
       )}
@@ -126,13 +128,13 @@ export default function SectionOverlay({ progress }: SectionOverlayProps) {
         >
           <div className="text-center">
             <p className="text-xs text-white/50 uppercase tracking-[0.5em] mb-4">
-              Starting from
+              TVアニメ好評放送中
             </p>
             <h2 className="text-5xl md:text-7xl font-thin text-white mb-6">
-              $24,500
+              葬送のフリーレン
             </h2>
             <button className="pointer-events-auto px-8 py-3 border border-white/30 text-sm uppercase tracking-widest text-white hover:bg-white hover:text-black transition-all duration-300">
-              Reserve Now
+              Watch Now
             </button>
           </div>
         </div>
