@@ -1,42 +1,53 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import Lenis from 'lenis';
 
 export function useScrollProgress() {
   const [progress, setProgress] = useState(0);
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const progressRef = useRef(0);
+  const rafId = useRef<number>(0);
+
+  const updateProgress = useCallback(() => {
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+
+    const currentProgress = Math.min(1, Math.max(0, window.scrollY / scrollHeight));
+
+    // Only update state if change is significant (reduces re-renders)
+    if (Math.abs(currentProgress - progressRef.current) > 0.001) {
+      progressRef.current = currentProgress;
+      setProgress(currentProgress);
+    }
+  }, []);
 
   useEffect(() => {
     const lenisInstance = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       smoothWheel: true,
+      syncTouch: true,
     });
 
     setLenis(lenisInstance);
 
+    // Use Lenis scroll callback for smoother updates
+    lenisInstance.on('scroll', updateProgress);
+
     function raf(time: number) {
       lenisInstance.raf(time);
-      requestAnimationFrame(raf);
+      rafId.current = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
-
-    const handleScroll = () => {
-      const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const currentProgress = window.scrollY / scrollHeight;
-      setProgress(Math.min(1, Math.max(0, currentProgress)));
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
+    rafId.current = requestAnimationFrame(raf);
+    updateProgress();
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId.current);
       lenisInstance.destroy();
     };
-  }, []);
+  }, [updateProgress]);
 
   return { progress, lenis };
 }
