@@ -28,12 +28,12 @@ export default function Home() {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className="absolute inset-0 w-full h-full object-cover"
           >
             <source src="/background.mp4" type="video/mp4" />
           </video>
-          {/* Dark overlay for better contrast */}
-          <div className="absolute inset-0 bg-black/50" />
+          {/* Dark overlay for better contrast - makes 3D model stand out */}
+          <div className="absolute inset-0 bg-black/70" />
         </div>
 
         {/* Fixed 3D scene */}

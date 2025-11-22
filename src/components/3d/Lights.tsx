@@ -19,25 +19,25 @@ export default function Lights({ progress }: LightsProps) {
   useFrame(() => {
     if (keyLightRef.current) {
       // Increase light intensity during hero reveal
-      keyLightRef.current.intensity = 0.5 + easedHero * 2.0;
+      keyLightRef.current.intensity = 1.0 + easedHero * 3.0;
     }
 
     if (rimLightRef.current) {
-      // Golden rim light fades in
-      rimLightRef.current.intensity = easedHero * 1.5;
+      // Rim light fades in
+      rimLightRef.current.intensity = easedHero * 2.0;
     }
   });
 
   return (
     <>
-      {/* Ambient light - base illumination */}
-      <ambientLight intensity={0.3} color="#1a1a2e" />
+      {/* Ambient light - stronger base illumination */}
+      <ambientLight intensity={0.8} color="#ffffff" />
 
       {/* Key light - main illumination */}
       <directionalLight
         ref={keyLightRef}
         position={[5, 5, 5]}
-        intensity={2.5}
+        intensity={4.0}
         color="#ffffff"
         castShadow
         shadow-mapSize={[2048, 2048]}
@@ -46,23 +46,23 @@ export default function Lights({ progress }: LightsProps) {
       {/* Fill light - soften shadows */}
       <pointLight
         position={[-3, 2, 4]}
-        intensity={0.8}
-        color="#e8f4ff"
+        intensity={1.5}
+        color="#ffffff"
       />
 
       {/* Rim light - highlight edges */}
       <pointLight
         ref={rimLightRef}
         position={[0, 3, -5]}
-        intensity={1.5}
-        color="#ffd700"
+        intensity={2.0}
+        color="#ffffff"
       />
 
-      {/* Bottom fill - subtle uplighting */}
+      {/* Front fill - illuminate model face */}
       <pointLight
-        position={[0, -3, 2]}
-        intensity={0.3}
-        color="#4a90e2"
+        position={[0, 0, 5]}
+        intensity={1.0}
+        color="#ffffff"
       />
     </>
   );
