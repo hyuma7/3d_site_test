@@ -6,7 +6,6 @@ import { EffectComposer, Bloom, ChromaticAberration, DepthOfField, Vignette } fr
 import { BlendFunction } from 'postprocessing';
 import * as THREE from 'three';
 import Watch from './Watch';
-import Background from './Background';
 import Lights from './Lights';
 import CameraController from './CameraController';
 import { getSectionProgress, easings } from '@/hooks/useScrollProgress';
@@ -30,17 +29,15 @@ export default function Scene({ progress }: SceneProps) {
       camera={{ fov: 45, position: [0, 0, 8], near: 0.1, far: 100 }}
       gl={{
         antialias: true,
-        alpha: false,
+        alpha: true,
         powerPreference: 'high-performance',
         stencil: false,
         depth: true,
       }}
       dpr={[1, 1.5]}
       performance={{ min: 0.5 }}
+      style={{ background: 'transparent' }}
     >
-      <color attach="background" args={['#050508']} />
-
-      <Background progress={progress} />
       <Lights progress={progress} />
       <Watch progress={progress} />
       <CameraController progress={progress} />

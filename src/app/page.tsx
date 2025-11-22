@@ -21,8 +21,23 @@ export default function Home() {
     <main>
       {/* Scroll container - total 1000vh for all sections */}
       <div className="h-[1000vh]">
+        {/* Video background */}
+        <div className="fixed inset-0 z-0">
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="w-full h-full object-cover"
+          >
+            <source src="/background.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for better contrast */}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
         {/* Fixed 3D scene */}
-        <div className="fixed inset-0">
+        <div className="fixed inset-0 z-10">
           <Scene progress={progress} />
         </div>
 
@@ -31,7 +46,7 @@ export default function Home() {
 
         {/* Scroll hint */}
         {progress < 0.05 && (
-          <div className="fixed bottom-16 left-1/2 -translate-x-1/2 text-white/40 text-xs tracking-widest uppercase animate-bounce">
+          <div className="fixed bottom-16 left-1/2 -translate-x-1/2 text-white/40 text-xs tracking-widest uppercase animate-bounce z-20">
             Scroll to explore
           </div>
         )}
